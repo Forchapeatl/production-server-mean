@@ -7,7 +7,7 @@ import { employeeRouter } from "./employee.routes";
 // Load environment variables from the .env file, where the ATLAS_URI is configured
 dotenv.config();
 
-const { ATLAS_URI } = process.env;
+const  ATLAS_URI  = 'mongodb+srv://forcha:MCtbot8rTFILrvyz@cluster0.n8jklrf.mongodb.net/?retryWrites=true&w=majority';
 
 if (!ATLAS_URI) {
     console.error("No ATLAS_URI environment variable has been defined in config.env");
