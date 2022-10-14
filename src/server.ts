@@ -14,6 +14,9 @@ if (!ATLAS_URI) {
     process.exit(1);
 }
 
+const PORT = process.env.PORT || 5200;
+
+
 connectToDatabase(ATLAS_URI)
     .then(() => {
         const app = express();
@@ -21,8 +24,8 @@ connectToDatabase(ATLAS_URI)
         app.use("/employees", employeeRouter);
 
         // start the Express server
-        app.listen(5200, () => {
-            console.log(`Server running at http://localhost:5200...`);
+        app.listen(PORT, () => {
+            console.log(`Server running at http://localhost:5200... ${PORT}`);
         });
 
     })
