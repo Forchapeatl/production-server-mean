@@ -1,11 +1,7 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -33,19 +29,20 @@ const database_1 = require("./database");
 const employee_routes_1 = require("./employee.routes");
 // Load environment variables from the .env file, where the ATLAS_URI is configured
 dotenv.config();
-const { ATLAS_URI } = process.env;
+const ATLAS_URI = 'mongodb+srv://forcha:MCtbot8rTFILrvyz@cluster0.n8jklrf.mongodb.net/?retryWrites=true&w=majority';
 if (!ATLAS_URI) {
     console.error("No ATLAS_URI environment variable has been defined in config.env");
     process.exit(1);
 }
+const PORT = process.env.PORT || 5200;
 (0, database_1.connectToDatabase)(ATLAS_URI)
     .then(() => {
     const app = (0, express_1.default)();
     app.use((0, cors_1.default)());
     app.use("/employees", employee_routes_1.employeeRouter);
     // start the Express server
-    app.listen(5200, () => {
-        console.log(`Server running at http://localhost:5200...`);
+    app.listen(PORT, () => {
+        console.log(`Server running at http://localhost:5200... ${PORT}`);
     });
 })
     .catch(error => console.error(error));
